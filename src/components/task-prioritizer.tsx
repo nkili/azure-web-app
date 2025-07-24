@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useSwissSystem } from '../hooks/useSwissSystem';
-import { Task, Match } from '../utils/swiss-system';
+import { Match } from '../utils/swiss-system';
 
 export const TaskPrioritizer: React.FC = () => {
   const [taskInput, setTaskInput] = useState('');
@@ -33,16 +33,14 @@ export const TaskPrioritizer: React.FC = () => {
     return (
       <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4">
         <div className="bg-white rounded-xl shadow-lg p-8 max-w-2xl w-full">
-          <h1 className="text-3xl font-bold text-gray-800 mb-6 text-center">
-            Task Prioritizer 🎯
-          </h1>
-          
+          <h1 className="text-3xl font-bold text-gray-800 mb-6 text-center">Task Prioritizer 🎯</h1>
+
           <div className="mb-6">
             <p className="text-gray-600 mb-4">
-              Enter your tasks below (one per line). You can use markdown list format or just plain text.
-              The Swiss System will help you prioritize them through head-to-head comparisons.
+              Enter your tasks below (one per line). You can use markdown list format or just plain text. The Swiss
+              System will help you prioritize them through head-to-head comparisons.
             </p>
-            
+
             <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-4">
               <h3 className="font-semibold text-blue-800 mb-2">How it works:</h3>
               <ul className="text-sm text-blue-700 space-y-1">
@@ -61,7 +59,7 @@ export const TaskPrioritizer: React.FC = () => {
             <textarea
               id="tasks"
               value={taskInput}
-              onChange={(e) => setTaskInput(e.target.value)}
+              onChange={e => setTaskInput(e.target.value)}
               placeholder={`- Complete project proposal
 - Review team feedback
 - Update documentation
@@ -69,7 +67,7 @@ export const TaskPrioritizer: React.FC = () => {
 - Prepare presentation slides`}
               className="w-full h-48 p-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
             />
-            
+
             <button
               onClick={handleStartPrioritization}
               disabled={!taskInput.trim()}
@@ -132,18 +130,12 @@ export const TaskPrioritizer: React.FC = () => {
 
           {/* Matches */}
           <div className="space-y-4">
-            <h2 className="text-lg font-semibold text-gray-800">
-              Round {currentRound} Matches
-            </h2>
-            
+            <h2 className="text-lg font-semibold text-gray-800">Round {currentRound} Matches</h2>
+
             {currentMatches
               .filter(match => match.taskA.id !== 'bye' && match.taskB.id !== 'bye')
-              .map((match) => (
-                <MatchCard
-                  key={match.id}
-                  match={match}
-                  onChoice={handleMatchChoice}
-                />
+              .map(match => (
+                <MatchCard key={match.id} match={match} onChoice={handleMatchChoice} />
               ))}
 
             {currentMatches.filter(match => match.taskA.id === 'bye' || match.taskB.id === 'bye').length > 0 && (
@@ -156,9 +148,7 @@ export const TaskPrioritizer: React.FC = () => {
 
             {isRoundComplete && (
               <div className="bg-white rounded-xl shadow-lg p-6 text-center">
-                <h3 className="text-lg font-semibold text-gray-800 mb-4">
-                  Round {currentRound} Complete!
-                </h3>
+                <h3 className="text-lg font-semibold text-gray-800 mb-4">Round {currentRound} Complete!</h3>
                 <button
                   onClick={nextRound}
                   className="bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-6 rounded-md transition duration-200"
@@ -179,12 +169,8 @@ export const TaskPrioritizer: React.FC = () => {
         <div className="max-w-4xl mx-auto">
           <div className="bg-white rounded-xl shadow-lg p-8">
             <div className="text-center mb-8">
-              <h1 className="text-3xl font-bold text-gray-800 mb-2">
-                Prioritization Complete! 🏆
-              </h1>
-              <p className="text-gray-600">
-                Here are your tasks ranked by importance based on your choices
-              </p>
+              <h1 className="text-3xl font-bold text-gray-800 mb-2">Prioritization Complete! 🏆</h1>
+              <p className="text-gray-600">Here are your tasks ranked by importance based on your choices</p>
             </div>
 
             <div className="space-y-4">
@@ -193,38 +179,44 @@ export const TaskPrioritizer: React.FC = () => {
                   key={task.id}
                   className={`
                     rounded-lg p-6 border-l-4 
-                    ${index === 0 ? 'bg-yellow-50 border-yellow-400' : 
-                      index === 1 ? 'bg-gray-50 border-gray-400' : 
-                      index === 2 ? 'bg-orange-50 border-orange-400' : 
-                      'bg-white border-blue-200'}
+                    ${
+                      index === 0
+                        ? 'bg-yellow-50 border-yellow-400'
+                        : index === 1
+                        ? 'bg-gray-50 border-gray-400'
+                        : index === 2
+                        ? 'bg-orange-50 border-orange-400'
+                        : 'bg-white border-blue-200'
+                    }
                   `}
                 >
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-4">
-                      <div className={`
+                      <div
+                        className={`
                         w-10 h-10 rounded-full flex items-center justify-center font-bold text-white
-                        ${index === 0 ? 'bg-yellow-500' : 
-                          index === 1 ? 'bg-gray-500' : 
-                          index === 2 ? 'bg-orange-500' : 
-                          'bg-blue-500'}
-                      `}>
+                        ${
+                          index === 0
+                            ? 'bg-yellow-500'
+                            : index === 1
+                            ? 'bg-gray-500'
+                            : index === 2
+                            ? 'bg-orange-500'
+                            : 'bg-blue-500'
+                        }
+                      `}
+                      >
                         #{index + 1}
                       </div>
                       <div>
                         <h3 className="font-semibold text-gray-800">{task.name}</h3>
                         <p className="text-sm text-gray-600">
                           Record: {task.wins} wins, {task.losses} losses
-                          {task.combinedOpponentWins > 0 && (
-                            <> • Opponent strength: {task.combinedOpponentWins}</>
-                          )}
+                          {task.combinedOpponentWins > 0 && <> • Opponent strength: {task.combinedOpponentWins}</>}
                         </p>
                       </div>
                     </div>
-                    {index < 3 && (
-                      <div className="text-2xl">
-                        {index === 0 ? '🥇' : index === 1 ? '🥈' : '🥉'}
-                      </div>
-                    )}
+                    {index < 3 && <div className="text-2xl">{index === 0 ? '🥇' : index === 1 ? '🥈' : '🥉'}</div>}
                   </div>
                 </div>
               ))}
@@ -256,7 +248,7 @@ const MatchCard: React.FC<MatchCardProps> = ({ match, onChoice }) => {
   if (match.winner) {
     const winner = match.taskA.id === match.winner ? match.taskA : match.taskB;
     const loser = match.taskA.id === match.winner ? match.taskB : match.taskA;
-    
+
     return (
       <div className="bg-white rounded-xl shadow-lg p-6 border border-green-200">
         <div className="text-center mb-4">
@@ -283,7 +275,7 @@ const MatchCard: React.FC<MatchCardProps> = ({ match, onChoice }) => {
         <h3 className="font-semibold text-gray-800 mb-2">Which task is more important?</h3>
         <p className="text-sm text-gray-600">Click on the task that has higher priority</p>
       </div>
-      
+
       <div className="flex items-center justify-center gap-6">
         <button
           onClick={() => onChoice(match.id, match.taskA.id)}
@@ -294,9 +286,9 @@ const MatchCard: React.FC<MatchCardProps> = ({ match, onChoice }) => {
             Current: {match.taskA.wins}W-{match.taskA.losses}L
           </div>
         </button>
-        
+
         <div className="text-2xl text-gray-400 font-bold">VS</div>
-        
+
         <button
           onClick={() => onChoice(match.id, match.taskB.id)}
           className="flex-1 p-6 bg-red-50 hover:bg-red-100 border-2 border-red-200 hover:border-red-300 rounded-lg transition-all duration-200 text-left"

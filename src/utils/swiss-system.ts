@@ -102,7 +102,7 @@ export class SwissSystemManager {
       // Find best opponent (similar score, haven't played before)
       for (let j = i + 1; j < sortedTasks.length; j++) {
         const candidate = sortedTasks[j];
-        
+
         if (paired.has(candidate.id)) continue;
         if (taskA.opponents.includes(candidate.id)) continue;
 
@@ -156,9 +156,7 @@ export class SwissSystemManager {
   }
 
   public recordMatchResult(matchId: string, winnerId: string): void {
-    const round = this.rounds.find(r => 
-      r.matches.some(m => m.id === matchId)
-    );
+    const round = this.rounds.find(r => r.matches.some(m => m.id === matchId));
 
     if (!round) return;
 
@@ -215,7 +213,7 @@ export class SwissSystemManager {
       .sort((a, b) => {
         // Primary: wins (descending)
         if (a.wins !== b.wins) return b.wins - a.wins;
-        // Secondary: losses (ascending)  
+        // Secondary: losses (ascending)
         if (a.losses !== b.losses) return a.losses - b.losses;
         // Tertiary: combined opponent wins (descending)
         return b.combinedOpponentWins - a.combinedOpponentWins;

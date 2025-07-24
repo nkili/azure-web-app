@@ -1,6 +1,6 @@
 import React from 'react';
-import { TaskPrioritizer } from './task-prioritizer';
 import { useAppContext } from '../contexts';
+import { TaskPrioritizer } from './task-prioritizer';
 
 export const TaskPrioritizerApp: React.FC = () => {
   const { goBackToMenu } = useAppContext();
@@ -13,18 +13,8 @@ export const TaskPrioritizerApp: React.FC = () => {
           onClick={goBackToMenu}
           className="bg-white/90 hover:bg-white text-gray-700 font-medium py-2 px-4 rounded-lg shadow-md transition-all duration-200 flex items-center gap-2 border border-gray-200"
         >
-          <svg 
-            className="w-4 h-4" 
-            fill="none" 
-            stroke="currentColor" 
-            viewBox="0 0 24 24"
-          >
-            <path 
-              strokeLinecap="round" 
-              strokeLinejoin="round" 
-              strokeWidth={2} 
-              d="M10 19l-7-7m0 0l7-7m-7 7h18" 
-            />
+          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
           </svg>
           Back to Menu
         </button>

@@ -20,9 +20,7 @@ export const AppMenu: React.FC<AppMenuProps> = ({ apps, onSelectApp }) => {
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-gray-800 mb-4">
-            Azure Web App Showcase
-          </h1>
+          <h1 className="text-4xl font-bold text-gray-800 mb-4">Azure Web App Showcase</h1>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
             Explore our collection of interactive web applications. Choose an app below to get started.
           </p>
@@ -30,7 +28,7 @@ export const AppMenu: React.FC<AppMenuProps> = ({ apps, onSelectApp }) => {
 
         {/* Apps Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {apps.map((app) => (
+          {apps.map(app => (
             <div
               key={app.id}
               className={`
@@ -53,14 +51,10 @@ export const AppMenu: React.FC<AppMenuProps> = ({ apps, onSelectApp }) => {
                     </span>
                   )}
                 </h3>
-                <p className="text-gray-600 text-sm leading-relaxed">
-                  {app.description}
-                </p>
+                <p className="text-gray-600 text-sm leading-relaxed">{app.description}</p>
                 {app.category && (
                   <div className="mt-3">
-                    <span className="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded-full">
-                      {app.category}
-                    </span>
+                    <span className="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded-full">{app.category}</span>
                   </div>
                 )}
               </div>
@@ -70,9 +64,7 @@ export const AppMenu: React.FC<AppMenuProps> = ({ apps, onSelectApp }) => {
 
         {/* Footer */}
         <div className="text-center mt-12 pt-8 border-t border-gray-200">
-          <p className="text-gray-500 text-sm">
-            Built with React, TypeScript, and Azure Web Apps
-          </p>
+          <p className="text-gray-500 text-sm">Built with React, TypeScript, and Azure Web Apps</p>
         </div>
       </div>
     </div>

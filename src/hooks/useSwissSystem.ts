@@ -1,5 +1,5 @@
-import { useState, useCallback } from 'react';
-import { SwissSystemManager, Task, Match, SwissRound } from '../utils/swiss-system';
+import { useCallback, useState } from 'react';
+import { Match, SwissRound, SwissSystemManager, Task } from '../utils/swiss-system';
 
 export interface UseSwissSystemReturn {
   // State
@@ -12,7 +12,7 @@ export interface UseSwissSystemReturn {
   tasks: Task[];
   rounds: SwissRound[];
   finalRankings: Task[];
-  
+
   // Actions
   startSwiss: (taskList: string) => void;
   recordMatchWinner: (matchId: string, winnerId: string) => void;
@@ -35,7 +35,10 @@ export function useSwissSystem(): UseSwissSystemReturn {
       .filter(line => line.length > 0)
       .map(line => {
         // Remove markdown list markers (-, *, +, numbers)
-        return line.replace(/^[-*+]\s*/, '').replace(/^\d+\.\s*/, '').trim();
+        return line
+          .replace(/^[-*+]\s*/, '')
+          .replace(/^\d+\.\s*/, '')
+          .trim();
       })
       .filter(task => task.length > 0);
 
@@ -49,31 +52,34 @@ export function useSwissSystem(): UseSwissSystemReturn {
     setIsSetup(false);
     setIsActive(true);
     setIsComplete(false);
-    
+
     // Generate first round
     manager.generateNextRound();
     setForceUpdate(prev => prev + 1);
   }, []);
 
-  const recordMatchWinner = useCallback((matchId: string, winnerId: string) => {
-    if (!swissManager) return;
+  const recordMatchWinner = useCallback(
+    (matchId: string, winnerId: string) => {
+      if (!swissManager) return;
 
-    swissManager.recordMatchResult(matchId, winnerId);
-    setForceUpdate(prev => prev + 1); // Force re-render
-  }, [swissManager]);
+      swissManager.recordMatchResult(matchId, winnerId);
+      setForceUpdate(prev => prev + 1); // Force re-render
+    },
+    [swissManager]
+  );
 
   const nextRound = useCallback(() => {
     if (!swissManager || !swissManager.isRoundComplete()) return;
 
     swissManager.advanceToNextRound();
-    
+
     if (swissManager.isSwissComplete()) {
       setIsActive(false);
       setIsComplete(true);
     } else {
       swissManager.generateNextRound();
     }
-    
+
     setForceUpdate(prev => prev + 1); // Force re-render
   }, [swissManager]);
 
@@ -96,7 +102,7 @@ export function useSwissSystem(): UseSwissSystemReturn {
     tasks: swissManager?.getTasks() || [],
     rounds: swissManager?.getRounds() || [],
     finalRankings: swissManager?.getFinalRankings() || [],
-    
+
     // Actions
     startSwiss,
     recordMatchWinner,

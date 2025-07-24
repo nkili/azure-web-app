@@ -24,7 +24,7 @@ describe('Main App Component', () => {
 
   test('renders app menu without crashing', async () => {
     await renderAndWaitForApp();
-    
+
     // Check if the main menu elements are present
     expect(screen.getByText('Azure Web App Showcase')).toBeInTheDocument();
     expect(screen.getByText('Dangerous Writing')).toBeInTheDocument();

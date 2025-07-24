@@ -1,3 +1,3 @@
-export { formatTime, formatTimeHuman } from './timeUtils';
 export { SwissSystemManager } from './swiss-system';
-export type { Task, Match, SwissRound } from './swiss-system';
+export type { Match, SwissRound, Task } from './swiss-system';
+export { formatTime, formatTimeHuman } from './timeUtils';
