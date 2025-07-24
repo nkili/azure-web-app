@@ -1,0 +1,1 @@
+export { WritingChallenge } from './WritingChallenge';
